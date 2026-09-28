@@ -66,14 +66,14 @@ def main() -> None:
 
     print("Funksioni 1:")
     print("Dalja:", shumezimi_i_matricave(matrica_a, matrica_b))
-    print("Rasti më i mirë kohor: O(n³)")
+    # print("Rasti më i mirë kohor: O(n³)")
     print("Rasti më i keq kohor: O(n³)")
     print("Big-O hapësinor: O(n²)")
 
     print("\nFunksioni 2:")
     print("Dalja:", distanca_levenshtein("mace", "male"))
     print("Rasti më i mirë kohor: O(m + n), kur njëri tekst është bosh")
-    print("Rasti më i keq kohor: O(m × n)")
+    # print("Rasti më i keq kohor: O(m × n)")
     print("Big-O hapësinor: O(n)")
 
     print("\nFunksioni 3:")
