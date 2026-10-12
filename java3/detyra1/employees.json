@@ -1,0 +1,16 @@
+{
+  "employees": [
+    { "id": 1, "name": "Alice Johnson", "position": "CEO", "salary": 250000, "supervisor_id": null },
+    { "id": 2, "name": "Bob Smith", "position": "CTO", "salary": 180000, "supervisor_id": 1 },
+    { "id": 3, "name": "Carol White", "position": "CFO", "salary": 175000, "supervisor_id": 1 },
+    { "id": 4, "name": "David Brown", "position": "Engineering Manager", "salary": 140000, "supervisor_id": 2 },
+    { "id": 5, "name": "Eve Davis", "position": "QA Manager", "salary": 130000, "supervisor_id": 2 },
+    { "id": 6, "name": "Frank Wilson", "position": "Senior Accountant", "salary": 95000, "supervisor_id": 3 },
+    { "id": 7, "name": "Grace Lee", "position": "Senior Developer", "salary": 120000, "supervisor_id": 4 },
+    { "id": 8, "name": "Henry Martinez", "position": "Junior Developer", "salary": 85000, "supervisor_id": 4 },
+    { "id": 9, "name": "Ivy Chen", "position": "QA Engineer", "salary": 90000, "supervisor_id": 5 },
+    { "id": 10, "name": "Jack Thompson", "position": "DevOps Engineer", "salary": 110000, "supervisor_id": 4 },
+    { "id": 11, "name": "Kelly Anderson", "position": "Junior Accountant", "salary": 65000, "supervisor_id": 6 },
+    { "id": 12, "name": "Liam Garcia", "position": "Intern Developer", "salary": 50000, "supervisor_id": 7 }
+  ]
+}
