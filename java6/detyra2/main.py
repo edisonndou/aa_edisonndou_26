@@ -1,20 +1,37 @@
-# TASK 2 — WRITE
-# findAll(T, P)
-# STEPS
-# 1. Start from horspool.
-# 2. alignments++ each time round the outer loop; comparisons++ before every character comparison.
-# 3. On a full match, save i - m + 1 and keep going.
-# 4. After a match, shift exactly as after a mismatch: by the table value of T[i].
-# REQUIREMENTS
-# - Returns the start of every match, in order.
-# - Overlapping matches count.
-# - [ ] if there is no match.
-# CHECK
-# const kur = 'Kur ngjite përpjetë, shiko dhe tatëpjetë.';
+﻿"""Find all matches, including overlaps. Run: python -m java6.detyra2.main"""
 
-# findAll(kur, 'pjetë')     // → [14, 35]
-
-# findAll('banana', 'ana')  // → [1, 3]
+from java6.detyra1 import main as search_state
 
 
-# Counters: 20 comparisons, 10 alignments.
+def findAll(T, P):
+    """Continue Horspool after every match instead of returning immediately."""
+    n, m = len(T), len(P)
+    # An empty pattern occurs at every boundary, including after the text.
+    # No character comparisons or search alignments are needed in this case.
+    if m == 0:
+        return list(range(n + 1))
+
+    table = search_state.shiftTable(P)
+    positions = []
+    i = m - 1
+    while i < n:
+        search_state.record_alignment()
+        k = 0
+        while k < m and search_state.compare_characters(P[m - 1 - k], T[i - k]):
+            k += 1
+        if k == m:
+            positions.append(i - m + 1)
+        # The same shift applies after a match and a mismatch. Moving by m
+        # after a match would lose overlaps, such as the two ana in banana.
+        i += table.get(T[i], m)
+    return positions
+
+
+if __name__ == "__main__":
+    text = "Kur ngjite përpjetë, shiko dhe tatëpjetë."
+    search_state.resetCounters()
+    print(findAll(text, "pjetë"))
+    print(search_state.getCounters())
+    search_state.resetCounters()
+    print(findAll("banana", "ana"))
+    print(search_state.getCounters())
