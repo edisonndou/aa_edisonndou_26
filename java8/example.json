@@ -1,0 +1,14 @@
+{
+  "inventory": [
+    {"product_id": "PROD001", "brand": "Samsung", "model": "Galaxy S21", "description": "128GB Black", "supplier_id": "SUP-A"},
+    {"product_id": "PROD002", "brand": "Apple", "model": "iPhone 13", "description": "256GB Blue", "supplier_id": "SUP-A"},
+    {"product_id": "PROD003", "brand": "Sony", "model": "WH-1000XM4", "description": "Noise Cancelling Headphones Black", "supplier_id": "SUP-B"}
+  ],
+  "incoming": [
+    {"product_id": "NEW001", "brand": "SAMSUNG", "model": "Galaxy S21", "description": "128 GB - Black Color", "supplier_id": "SUP-C"},
+    {"product_id": "NEW002", "brand": "Apple", "model": "iPhone 13 Pro", "description": "256GB Gold", "supplier_id": "SUP-D"},
+    {"product_id": "NEW003", "brand": "Sony", "model": "WH1000XM4", "description": "Noise-Cancelling Headphones (Black)", "supplier_id": "SUP-C"},
+    {"product_id": "NEW004", "brand": "LG", "model": "OLED TV 55", "description": "55 inch 4K", "supplier_id": "SUP-D"},
+    {"product_id": "NEW005", "brand": "APPLE", "model": "iPhone 13 Pro", "description": "Gold 256 GB", "supplier_id": "SUP-E"}
+  ]
+}
