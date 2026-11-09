@@ -1,79 +1,66 @@
-# Java 6 - string-search exercises in Python
+﻿# Java 6 - Kërkimi në tekst
 
-Here `java6` means week 6; these solutions use Python, as requested.
-Each folder contains its implementation and explanatory comments. The shared
-`search.py` exposes the complete API without duplicating the algorithms.
+## Çfarë kërkohej dhe çfarë bëmë?
 
-| Folder | Implementation |
-| --- | --- |
-| `detyra1` | Counters, `bruteForce`, `shiftTable`, `horspool`, `horspool2` |
-| `detyra2` | `findAll`, including overlapping matches |
-| `detyra3` | `highlight`, skipping overlapping highlights |
-| `detyra4` | `goodSuffixTable`, including the prefix fallback |
-| `detyra5` | `boyerMoore`, combining bad-character and good-suffix shifts |
+Duhej të gjenim një fjalë ose pjesë teksti brenda një teksti tjetër, të numëronim krahasimet, të gjenim të gjitha paraqitjet dhe t'i shënonim me kllapa. Implementuam disa algoritme me krahasime shkronjash, pa kërkim, zëvendësim, ndarje teksti ose regex të gatshëm. Zgjidhjet janë në Python dhe ndahen në pesë detyra.
 
-The supplied `detyra5` instructions duplicate `detyra4`. The fifth solution
-implements `boyerMoore`, which the assignment's required export list names.
-The JavaScript export requirement is translated into `java6/search.py` and
-its Python `__all__` list.
+`T` është teksti ku kërkojmë; `P` është pjesa që kërkojmë. Pozicionet fillojnë nga `0`. Kërkimi i parë kthen `-1` kur nuk gjen përputhje.
 
-## Run
+## detyra1/main.py - Kërkimi dhe numërimi
 
-With Python 3 installed, run from the repository root:
+| Funksioni | Çfarë kërkohej dhe çfarë bëmë? | Pse e përdorëm? |
+| --- | --- | --- |
+| `resetCounters()` | Kthejmë numëruesit në zero. | Që matja e re të mos përzihet me të vjetrën. |
+| `getCounters()` | Marrim numrin e krahasimeve dhe të pozicioneve të provuara. | Që të shohim sa punë bëri kërkimi. |
+| `record_alignment()` | Numërojmë një vendosje të fjalës mbi tekst. | Që të dimë sa pozicione provuam. |
+| `compare_characters(a, b)` | Krahasojmë dy shkronja dhe numërojmë krahasimin, edhe kur ndryshojnë. | Që çdo algoritëm të matet njësoj. |
+| `bruteForce(T, P)` | Provojmë çdo pozicion një nga një dhe kthejmë përputhjen e parë. | Është mënyra më e thjeshtë për të kuptuar kërkimin. |
+| `shiftTable(P)` | Ndërtojmë një tabelë që tregon sa mund ta lëvizim fjalën sipas shkronjës. Shkronjën e fundit nuk e përfshijmë. | Që të kapërcejmë pozicione pa i provuar të gjitha. |
+| `horspool(T, P)` | Krahasojmë nga fundi i fjalës dhe lëvizim sipas shkronjës në fund të pjesës së tekstit që po kontrollojmë. | Shpesh bën më pak krahasime se kërkimi i thjeshtë. |
+| `horspool2(T, P)` | Ruajmë variantin e ligjëratës që lëviz sipas shkronjës ku ndodhi dallimi. | Për ta krahasuar me Horspool; ky variant mund të kapërcejë përputhje të sakta. |
+
+## detyra2/main.py - Të gjitha paraqitjet
+
+| Funksioni | Çfarë kërkohej dhe çfarë bëmë? | Pse e përdorëm? |
+| --- | --- | --- |
+| `findAll(T, P)` | Vazhdojmë kërkimin pas çdo gjetjeje dhe mbledhim të gjitha pozicionet, edhe kur paraqitjet mbivendosen. | Që të mos ndalemi te gjetja e parë. |
+
+Shembull: `findAll('banana', 'ana')` jep `[1, 3]`.
+
+## detyra3/main.py - Shënimi me kllapa
+
+| Funksioni | Çfarë kërkohej dhe çfarë bëmë? | Pse e përdorëm? |
+| --- | --- | --- |
+| `highlight(T, P)` | Përdorim `findAll` dhe vendosim kllapa rreth paraqitjeve që nuk mbivendosen. | Që pjesa e gjetur të dallohet në tekst. |
+
+Shembull: `highlight('banana', 'ana')` jep `b[ana]na`. Paraqitjen e dytë nuk e shënojmë sepse mbivendoset me të parën.
+
+## detyra4/main.py - Pjesa në fund që përputhet
+
+| Funksioni | Çfarë kërkohej dhe çfarë bëmë? | Pse e përdorëm? |
+| --- | --- | --- |
+| `goodSuffixTable(P)` | Përgatisim lëvizjet sipas pjesës në fund të fjalës që tashmë u përputh. Kërkojmë të njëjtën pjesë më herët ose një fillim që përputhet me fundin. Nëse nuk ka, lëvizim sa gjatësia e fjalës. | Që të përdorim informacionin e gjetur dhe të shmangim krahasime të panevojshme. |
+
+## detyra5/main.py - Bashkimi i dy rregullave
+
+| Funksioni | Çfarë kërkohej dhe çfarë bëmë? | Pse e përdorëm? |
+| --- | --- | --- |
+| `boyerMoore(T, P)` | Bashkojmë rregullin e shkronjës që nuk përputhet me `goodSuffixTable` dhe zgjedhim lëvizjen më të madhe të sigurt. | Që kërkimi të kapërcejë më shumë pozicione të panevojshme. |
+
+Teksti i detyrës 5 përsëriste detyrën 4. Implementuam `boyerMoore`, sepse ishte në listën e funksioneve të kërkuara.
+
+## search.py dhe përdorimi
+
+`search.py` i mbledh funksionet për t'i importuar nga një vend; nuk shton funksione të reja. `__all__` përcakton listën publike të tyre.
+
+Nga dosja kryesore e projektit:
 
 ```powershell
 python -m java6.detyra1.main
-python -m java6.detyra2.main
-python -m java6.detyra3.main
-python -m java6.detyra4.main
-python -m java6.detyra5.main
 ```
 
-Use module commands so imports between exercise folders resolve correctly.
-The files print examples only when run as the main module; imports are quiet.
-No third-party packages are needed.
+Për detyrat e tjera përdor `detyra2` deri te `detyra5`. Nuk duhen paketa shtesë.
 
-## Shared API
+Kërkimi dallon shkronjat e mëdha nga të voglat. Për një fjalë bosh, kërkimi i parë kthen `0`, `findAll` kthen çdo kufi mes shkronjave, ndërsa `highlight` nuk ndryshon tekstin. Numëruesit mblidhen deri te `resetCounters()`; përgatitja e tabelave nuk shton krahasime kërkimi. Për kërkim të saktë përdor `horspool` ose `boyerMoore`, jo variantin mësimor `horspool2`.
 
-```python
-from java6.search import (
-    bruteForce, shiftTable, horspool, horspool2,
-    findAll, highlight, goodSuffixTable, boyerMoore,
-    resetCounters, getCounters,
-)
-```
-
-- Positions are zero-based Python Unicode character indexes.
-- First-match searches return `-1` if there is no match.
-- `findAll` returns all positions in order, or `[]` if there are none.
-- Empty patterns return `0` for first-match searches and every text boundary
-  for `findAll`. `highlight` leaves text unchanged for an empty pattern.
-- Counters accumulate until `resetCounters()` is called. A comparison counts
-  every pattern-to-text character comparison, including failures. An alignment
-  counts every actual nonempty-pattern placement. Empty-pattern operations and
-  table preprocessing add no counts.
-- `highlight` gets its search counts from `findAll`; copying the output does
-  not add search comparisons or alignments.
-- No built-in substring searches, replacement, splitting, or regex are used.
-
-`horspool2` intentionally preserves the earlier lecture variant, whose
-unadjusted mismatch-character shift can skip valid occurrences. Use `horspool`
-or `boyerMoore` for a correct first-match search.
-
-## Assignment examples (expected, not executed)
-
-For `kur = 'Kur ngjite përpjetë, shiko dhe tatëpjetë.'`:
-
-- `findAll(kur, 'pjetë')` gives `[14, 35]`. After resetting counters first,
-  this search uses 20 comparisons and 10 alignments.
-- `findAll('banana', 'ana')` gives `[1, 3]`.
-- `highlight(kur, 'pjetë')` gives
-  `'Kur ngjite për[pjetë], shiko dhe tatë[pjetë].'`.
-- `highlight('banana', 'ana')` gives `'b[ana]na'`.
-- `goodSuffixTable('ABCBAB')` gives `[0, 2, 4, 4, 4, 4]`.
-- `goodSuffixTable('BAOBAB')` gives `[0, 2, 5, 5, 5, 5]`.
-- `goodSuffixTable('tatëpjetë')` gives `[0, 9, 5, 9, 9, 9, 9, 9, 9]`.
-
-Tests were not written or run, per the project's testing preference. Python
-was unavailable in the implementation shell, so interpreter syntax checking
-was not performed either.
+Gjatë këtij rikrijimi nuk u shkruan dhe nuk u ekzekutuan teste.
